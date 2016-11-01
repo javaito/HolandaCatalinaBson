@@ -171,6 +171,7 @@ public final class BsonDecoder {
             if(nameBuffer.limit() == nameBuffer.position()) {
                 nameBuffer.limit(nameBuffer.limit() + 128);
             }
+            b = buffer.get();
         }
         nameBuffer.flip();
         return new String(nameBuffer.array());

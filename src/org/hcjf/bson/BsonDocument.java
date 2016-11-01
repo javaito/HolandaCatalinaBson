@@ -9,15 +9,12 @@ import java.util.Iterator;
 public class BsonDocument extends BsonCollection {
 
     public BsonDocument() {
-        this(null, 0);
+        //4 bytes to length and 1 byte for the separator 0x00
+        this(null, 5);
     }
 
     public BsonDocument(String name) {
-        this(name, 0);
-    }
-
-    public BsonDocument(Integer length) {
-        super(null, length);
+        this(name, 5);
     }
 
     public BsonDocument(String name, Integer length) {
@@ -31,15 +28,6 @@ public class BsonDocument extends BsonCollection {
     @Override
     public final Iterator<String> iterator() {
         return getValue().keySet().iterator();
-    }
-
-    /**
-     *
-     * @param name
-     * @return
-     */
-    public final BsonElement get(String name) {
-        return getValue().get(name);
     }
 
     /**

@@ -100,6 +100,10 @@ public enum BsonType {
             type = BINARY;
         } else if(UUID.class.isAssignableFrom(clazz)) {
             type = BINARY;
+        } else if(BsonDocument.class.isAssignableFrom(clazz)) {
+            type = DOCUMENT;
+        } else if(BsonArray.class.isAssignableFrom(clazz)) {
+            type = ARRAY;
         }
 
         return type;

@@ -8,20 +8,12 @@ import java.util.Iterator;
  */
 public class BsonArray extends BsonCollection {
 
-    public BsonArray() {
-        this(null, 0);
-    }
-
     public BsonArray(String name) {
-        this(name, 0);
-    }
-
-    public BsonArray(Integer length) {
-        this(null, 0);
+        this(name, 5);
     }
 
     public BsonArray(String name, Integer length) {
-        super(name);
+        super(name, length);
     }
 
     /**

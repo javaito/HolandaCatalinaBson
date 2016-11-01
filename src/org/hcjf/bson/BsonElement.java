@@ -78,6 +78,10 @@ public abstract class BsonElement<O extends Object> {
         return (BsonDocument) value;
     }
 
+    public final BsonArray getAsArray() {
+        return (BsonArray) value;
+    }
+
     public final Integer getAsInteger() {
         return (Integer) value;
     }
