@@ -1,6 +1,8 @@
 package org.hcjf.bson;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author javaito
@@ -13,8 +15,24 @@ public class BsonDocument extends BsonCollection {
         this(null, 5);
     }
 
+    public BsonDocument(Map<String, Object> values) {
+        this(null, values);
+    }
+
     public BsonDocument(String name) {
         this(name, 5);
+    }
+
+    public BsonDocument(String name, Map<String, Object> values) {
+        this(name, 5);
+
+        if(values == null) {
+            throw new IllegalArgumentException("");
+        }
+
+        for(String key : values.keySet()) {
+            put(key, values.get(key));
+        }
     }
 
     public BsonDocument(String name, Integer length) {
@@ -36,5 +54,20 @@ public class BsonDocument extends BsonCollection {
      */
     public final void put(BsonElement element) {
         putElement(element);
+    }
+
+    /**
+     *
+     * @param elementName
+     * @param value
+     */
+    public final void put(String elementName, Object value) {
+        if(value instanceof Map) {
+            put(new BsonDocument(elementName, (Map<String,Object>)value));
+        } else if(value instanceof List) {
+            put(new BsonArray(elementName, (List<Object>)value));
+        } else {
+            put(new BsonPrimitive(elementName, value));
+        }
     }
 }

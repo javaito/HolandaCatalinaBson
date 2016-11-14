@@ -174,6 +174,8 @@ public final class BsonDecoder {
             b = buffer.get();
         }
         nameBuffer.flip();
-        return new String(nameBuffer.array());
+        byte[] result = new byte[nameBuffer.limit()];
+        nameBuffer.get(result);
+        return new String(result);
     }
 }

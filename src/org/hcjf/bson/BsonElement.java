@@ -1,6 +1,7 @@
 package org.hcjf.bson;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -13,6 +14,11 @@ public abstract class BsonElement<O extends Object> {
     private final O value;
 
     public BsonElement(String name, O value) {
+
+        if(BsonType.fromValue(value) == null && !Map.class.isAssignableFrom(value.getClass())) {
+            throw new IllegalArgumentException("");
+        }
+
         this.name = name;
         this.value = value;
     }
@@ -42,7 +48,7 @@ public abstract class BsonElement<O extends Object> {
      *
      * @return
      */
-    protected final O getValue() {
+    public final O getValue() {
         return value;
     }
 
@@ -75,11 +81,11 @@ public abstract class BsonElement<O extends Object> {
     }
 
     public final BsonDocument getAsDocument() {
-        return (BsonDocument) value;
+        return (BsonDocument) this;
     }
 
     public final BsonArray getAsArray() {
-        return (BsonArray) value;
+        return (BsonArray) this;
     }
 
     public final Integer getAsInteger() {
@@ -104,5 +110,9 @@ public abstract class BsonElement<O extends Object> {
 
     public final UUID getAsUUID() {
         return (UUID) value;
+    }
+
+    public final Boolean getAsBoolean() {
+        return (Boolean) value;
     }
 }

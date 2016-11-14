@@ -77,33 +77,35 @@ public enum BsonType {
     public static BsonType fromValue(Object value) {
         BsonType type = null;
 
-        Class clazz = value.getClass();
         if(value == null) {
             type = NULL;
-        } else if(Double.class.isAssignableFrom(clazz)) {
-            type = DOUBLE;
-        } else if(String.class.isAssignableFrom(clazz)) {
-            type = STRING;
-        } else if(ByteBuffer.class.isAssignableFrom(clazz)) {
-            type = BINARY;
-        } else if(Boolean.class.isAssignableFrom(clazz)) {
-            type = BOOLEAN;
-        } else if(Date.class.isAssignableFrom(clazz)) {
-            type = DATE;
-        } else if(Integer.class.isAssignableFrom(clazz)) {
-            type = INTEGER;
-        } else if(Long.class.isAssignableFrom(clazz)) {
-            type = LONG;
-        } else if(ByteArrayOutputStream.class.isAssignableFrom(clazz)) {
-            type = BINARY;
-        } else if(byte[].class.isAssignableFrom(clazz)) {
-            type = BINARY;
-        } else if(UUID.class.isAssignableFrom(clazz)) {
-            type = BINARY;
-        } else if(BsonDocument.class.isAssignableFrom(clazz)) {
-            type = DOCUMENT;
-        } else if(BsonArray.class.isAssignableFrom(clazz)) {
-            type = ARRAY;
+        }else {
+            Class clazz = value.getClass();
+            if (Double.class.isAssignableFrom(clazz)) {
+                type = DOUBLE;
+            } else if (String.class.isAssignableFrom(clazz)) {
+                type = STRING;
+            } else if (ByteBuffer.class.isAssignableFrom(clazz)) {
+                type = BINARY;
+            } else if (Boolean.class.isAssignableFrom(clazz)) {
+                type = BOOLEAN;
+            } else if (Date.class.isAssignableFrom(clazz)) {
+                type = DATE;
+            } else if (Integer.class.isAssignableFrom(clazz)) {
+                type = INTEGER;
+            } else if (Long.class.isAssignableFrom(clazz)) {
+                type = LONG;
+            } else if (ByteArrayOutputStream.class.isAssignableFrom(clazz)) {
+                type = BINARY;
+            } else if (byte[].class.isAssignableFrom(clazz)) {
+                type = BINARY;
+            } else if (UUID.class.isAssignableFrom(clazz)) {
+                type = BINARY;
+            } else if (BsonDocument.class.isAssignableFrom(clazz)) {
+                type = DOCUMENT;
+            } else if (BsonArray.class.isAssignableFrom(clazz)) {
+                type = ARRAY;
+            }
         }
 
         return type;
