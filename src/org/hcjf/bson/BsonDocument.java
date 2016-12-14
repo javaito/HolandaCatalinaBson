@@ -12,7 +12,7 @@ public class BsonDocument extends BsonCollection {
 
     public BsonDocument() {
         //4 bytes to length and 1 byte for the separator 0x00
-        this(null, 5);
+        this(null, DEFAULT_COLLECTION_SIZE);
     }
 
     public BsonDocument(Map<String, Object> values) {
@@ -20,11 +20,11 @@ public class BsonDocument extends BsonCollection {
     }
 
     public BsonDocument(String name) {
-        this(name, 5);
+        this(name, DEFAULT_COLLECTION_SIZE);
     }
 
     public BsonDocument(String name, Map<String, Object> values) {
-        this(name, 5);
+        this(name, DEFAULT_COLLECTION_SIZE);
 
         if(values == null) {
             throw new IllegalArgumentException("");

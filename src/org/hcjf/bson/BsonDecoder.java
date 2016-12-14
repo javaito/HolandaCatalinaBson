@@ -136,9 +136,7 @@ public final class BsonDecoder {
                 break;
             }
             case UUID: {
-                byte[] byteArray = new byte[16]; //UUID length
-                buffer.get(byteArray);
-                result = UUID.nameUUIDFromBytes(byteArray);
+                result = new UUID(buffer.getLong(), buffer.getLong());
                 break;
             }
         }

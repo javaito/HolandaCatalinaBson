@@ -1,21 +1,21 @@
 package org.hcjf.bson;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * Bson array implementation.
  * @author javaito
  * @mail javaito@gmail.com
  */
 public class BsonArray extends BsonCollection {
 
     public BsonArray(String name) {
-        this(name, 5);
+        this(name, DEFAULT_COLLECTION_SIZE);
     }
 
     public BsonArray(String name, List<? extends  Object> values) {
-        this(name, 5);
+        this(name, DEFAULT_COLLECTION_SIZE);
         for(Object value : values) {
             add(value);
         }
@@ -26,19 +26,24 @@ public class BsonArray extends BsonCollection {
     }
 
     /**
-     *
-     * @param index
-     * @return
+     * Return the element of the position.
+     * @param index Position index.
+     * @return Element founded or null.
      */
     public final BsonElement get(Integer index) {
         return getValue().get(index.toString());
     }
 
     /**
-     *
-     * @param element
+     * Add the element to the array.
+     * @param element Element to add.
+     * @throws IllegalArgumentException if the element is null.
      */
     public final void add(BsonElement element) {
+        if(element == null) {
+            throw new IllegalArgumentException("Bson array not support null elements.");
+        }
+
         Integer currentSize = getValue().size();
         element.setName(currentSize.toString());
         putElement(element);

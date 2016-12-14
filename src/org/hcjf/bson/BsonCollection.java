@@ -10,14 +10,16 @@ import java.util.*;
 public abstract class BsonCollection extends BsonElement<Map<String, BsonElement>>
         implements Iterable<String> {
 
+    protected static final Integer DEFAULT_COLLECTION_SIZE = 5;
+
     private Integer length;
 
     public BsonCollection() {
-        this(null, 0);
+        this(null, DEFAULT_COLLECTION_SIZE);
     }
 
     public BsonCollection(String name) {
-        this(name, 0);
+        this(name, DEFAULT_COLLECTION_SIZE);
     }
 
     public BsonCollection(Integer length) {
