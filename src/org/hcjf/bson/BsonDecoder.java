@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 
 /**
+ *
  * @author javaito
  * @mail javaito@gmail.com
  */
@@ -162,12 +163,12 @@ public final class BsonDecoder {
      * @return
      */
     private static String decodeName(ByteBuffer buffer) {
-        ByteBuffer nameBuffer = ByteBuffer.allocate(128);
+        ByteBuffer nameBuffer = ByteBuffer.allocate(10240);
         byte b = buffer.get();
         while(b != BsonType.END.getId()) {
             nameBuffer.put(b);
             if(nameBuffer.limit() == nameBuffer.position()) {
-                nameBuffer.limit(nameBuffer.limit() + 128);
+                break;
             }
             b = buffer.get();
         }
