@@ -17,7 +17,9 @@ public class BsonArray extends BsonCollection {
     public BsonArray(String name, List<? extends  Object> values) {
         this(name, DEFAULT_COLLECTION_SIZE);
         for(Object value : values) {
-            add(value);
+            if(value != null) {
+                add(value);
+            }
         }
     }
 
@@ -50,8 +52,8 @@ public class BsonArray extends BsonCollection {
     }
 
     /**
-     *
-     * @param value
+     * Add a new value to the array.
+     * @param value Array's value.
      */
     public final void add(Object value) {
         String name = Integer.toString(getValue().size());

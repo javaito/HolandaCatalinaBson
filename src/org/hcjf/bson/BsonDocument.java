@@ -30,8 +30,12 @@ public class BsonDocument extends BsonCollection {
             throw new IllegalArgumentException("");
         }
 
+        Object value;
         for(String key : values.keySet()) {
-            put(key, values.get(key));
+            value = values.get(key);
+            if(value != null) {
+                put(key, value);
+            }
         }
     }
 
