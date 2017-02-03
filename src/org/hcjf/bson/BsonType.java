@@ -1,11 +1,13 @@
 package org.hcjf.bson;
 
 import java.io.ByteArrayOutputStream;
+import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.UUID;
 
 /**
+ * Enum with all the supported type for the bson definition.
  * @author javaito
  * @mail javaito@gmail.com
  */
@@ -44,17 +46,17 @@ public enum BsonType {
     }
 
     /**
-     *
-     * @return
+     * Return the id of the bson tipe.
+     * @return Id the of the bson type.
      */
     public byte getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Return a bson type by id.
+     * @param id Id of the bson type.
+     * @return Bson type.
      */
     public static BsonType fromId(byte id) {
         BsonType result = null;
@@ -70,9 +72,10 @@ public enum BsonType {
     }
 
     /**
-     *
-     * @param value
-     * @return
+     * Return the bson type that match with the java class of the object.
+     * @param value Object to match.
+     * @return Return the bson type that match of null if none bson type match
+     * with the java class of the object.
      */
     public static BsonType fromValue(Object value) {
         BsonType type = null;

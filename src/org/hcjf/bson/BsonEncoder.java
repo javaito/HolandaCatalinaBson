@@ -74,7 +74,8 @@ public final class BsonEncoder {
                 case LONG: result.putLong(((Long)element.getValue())); break;
                 case STRING: {
                     String stringValue = (String) element.getValue();
-                    result.putInt(stringValue.length() + 1); //Bson specification, the total length is the length of the string + 1 for 0x00
+                    //Bson specification, the total length is the length of the string + 1 for 0x00
+                    result.putInt(stringValue.getBytes().length + 1);
                     result.put(stringValue.getBytes());
                     result.put(BsonType.END.getId());
                     break;
@@ -82,7 +83,7 @@ public final class BsonEncoder {
                 case TIMESTAMP: result.putLong(((Long)element.getValue())); break;
                 case REGEX: {
                     String stringValue = (String) element.getValue();
-                    result.putInt(stringValue.length());
+                    result.putInt(stringValue.getBytes().length);
                     result.put(stringValue.getBytes());
                     result.put(BsonType.END.getId());
                     break;

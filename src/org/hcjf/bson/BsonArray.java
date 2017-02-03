@@ -50,8 +50,8 @@ public class BsonArray extends BsonCollection {
     }
 
     /**
-     *
-     * @param value
+     * Add a new object to the array.
+     * @param value Object.
      */
     public final void add(Object value) {
         String name = Integer.toString(getValue().size());

@@ -16,7 +16,7 @@ public abstract class BsonElement<O extends Object> {
     public BsonElement(String name, O value) {
 
         if(BsonType.fromValue(value) == null && !Map.class.isAssignableFrom(value.getClass())) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Unsupported type: " + value.getClass());
         }
 
         this.name = name;

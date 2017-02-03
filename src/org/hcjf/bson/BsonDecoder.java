@@ -6,26 +6,26 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 
 /**
- *
+ * This class implements the bson decoder.
  * @author javaito
  * @mail javaito@gmail.com
  */
 public final class BsonDecoder {
 
     /**
-     *
-     * @param documentBytes
-     * @return
+     * This method create a bson document from a byte array as imput.
+     * @param documentBytes Input byte array.
+     * @return Bson document decoded.
      */
     public static BsonDocument decode(byte[] documentBytes) {
         return decodeDocument(null, ByteBuffer.wrap(documentBytes));
     }
 
     /**
-     *
-     * @param name
-     * @param buffer
-     * @return
+     * Recursive method to decode a bson document.
+     * @param name Name of the bson document.
+     * @param buffer Buffer with the byte representation fo the document.
+     * @return Bson document decoded.
      */
     private static BsonDocument decodeDocument(String name, ByteBuffer buffer) {
         Integer documentSize = buffer.getInt();
@@ -55,10 +55,10 @@ public final class BsonDecoder {
     }
 
     /**
-     *
-     * @param name
-     * @param buffer
-     * @return
+     * Recursive method to decode a bson array.
+     * @param name Name of the bson array.
+     * @param buffer Buffer with the byte representation fo the array.
+     * @return Bson array decode.
      */
     private static BsonArray decodeArray(String name, ByteBuffer buffer) {
         Integer documentSize = buffer.getInt();
@@ -88,11 +88,11 @@ public final class BsonDecoder {
     }
 
     /**
-     *
-     * @param name
-     * @param type
-     * @param buffer
-     * @return
+     * This method create a decoded bson primitive.
+     * @param name Name of the primitive.
+     * @param type Type of the primitive.
+     * @param buffer Buffer with the byte representation fo the primitive.
+     * @return Decode bson primitive.
      */
     private static BsonPrimitive decodePrimitive(String name, BsonType type, ByteBuffer buffer) {
         BsonPrimitive result = null;
@@ -121,9 +121,9 @@ public final class BsonDecoder {
     }
 
     /**
-     *
-     * @param buffer
-     * @return
+     * Decode the different sub-types of the binary types.
+     * @param buffer Buffer with the byte representation fo the binary object.
+     * @return Decoded binary sub-type.
      */
     private static Object decodeBinary(ByteBuffer buffer) {
         Object result = null;
@@ -145,9 +145,9 @@ public final class BsonDecoder {
     }
 
     /**
-     *
-     * @param buffer
-     * @return
+     * Decode string object from a buffer.
+     * @param buffer Buffer with the byte representation of string object.
+     * @return Decoded string object.
      */
     private static String decodeString(ByteBuffer buffer) {
         int size = buffer.getInt();
@@ -158,12 +158,12 @@ public final class BsonDecoder {
     }
 
     /**
-     *
-     * @param buffer
-     * @return
+     * Decode name from the bson document.
+     * @param buffer Buffer with the byte representation of the field name.
+     * @return Decoded field name.
      */
     private static String decodeName(ByteBuffer buffer) {
-        ByteBuffer nameBuffer = ByteBuffer.allocate(10240);
+        ByteBuffer nameBuffer = ByteBuffer.allocate(256);
         byte b = buffer.get();
         while(b != BsonType.END.getId()) {
             nameBuffer.put(b);

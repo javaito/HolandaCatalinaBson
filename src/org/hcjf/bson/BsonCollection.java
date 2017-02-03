@@ -58,7 +58,7 @@ public abstract class BsonCollection extends BsonElement<Map<String, BsonElement
                 length += 8;
             } else if (String.class.isAssignableFrom(clazz)) {
                 length += 4;//Bytes reserved for the length of string
-                length += ((String) value).length();
+                length += ((String) value).getBytes().length;
                 length += 1;//Add the length of the end byte (0x00)
             } else if (ByteBuffer.class.isAssignableFrom(clazz)) {
                 length += 4;//Bytes reserved for the length of buffer
@@ -88,17 +88,17 @@ public abstract class BsonCollection extends BsonElement<Map<String, BsonElement
     }
 
     /**
-     *
-     * @param name
-     * @return
+     * Return the bson element associated to the name.
+     * @param name Name of the bson element.
+     * @return Return the element.
      */
     public final BsonElement get(String name) {
         return getValue().get(name);
     }
 
     /**
-     *
-     * @return
+     * Return the size of the bson collection.
+     * @return Size of the collection.
      */
     public final int size() {
         return getValue().size();
