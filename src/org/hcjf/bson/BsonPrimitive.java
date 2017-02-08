@@ -6,8 +6,11 @@ package org.hcjf.bson;
  */
 public class BsonPrimitive extends BsonElement<Object> {
 
+    private final BsonType type;
+
     public BsonPrimitive(String name, Object value) {
         super(name, value);
+        this.type = BsonType.fromValue(value);
     }
 
     /**
@@ -16,5 +19,9 @@ public class BsonPrimitive extends BsonElement<Object> {
      */
     public final Object get() {
         return getValue();
+    }
+
+    public BsonType getType() {
+        return type;
     }
 }
