@@ -3,6 +3,7 @@ package org.hcjf.bson;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author javaito
@@ -70,6 +71,8 @@ public class BsonDocument extends BsonCollection {
             put(new BsonDocument(elementName, (Map<String,Object>)value));
         } else if(value instanceof List) {
             put(new BsonArray(elementName, (List<Object>)value));
+        } else if(value instanceof Set) {
+            put(new BsonArray(elementName, (Set<Object>)value));
         } else {
             put(new BsonPrimitive(elementName, value));
         }

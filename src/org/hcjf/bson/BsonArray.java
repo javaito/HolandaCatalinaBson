@@ -1,7 +1,9 @@
 package org.hcjf.bson;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Bson array implementation.
@@ -14,7 +16,7 @@ public class BsonArray extends BsonCollection {
         this(name, DEFAULT_COLLECTION_SIZE);
     }
 
-    public BsonArray(String name, List<? extends  Object> values) {
+    public BsonArray(String name, Collection<? extends  Object> values) {
         this(name, DEFAULT_COLLECTION_SIZE);
         for(Object value : values) {
             if(value != null) {
@@ -61,6 +63,8 @@ public class BsonArray extends BsonCollection {
             add(new BsonDocument(name, (Map<String,Object>)value));
         } else if(value instanceof List) {
             add(new BsonArray(name, (List<Object>)value));
+        } else if(value instanceof Set) {
+            add(new BsonArray(name, (Set<Object>)value));
         } else {
             add(new BsonPrimitive(name, value));
         }
