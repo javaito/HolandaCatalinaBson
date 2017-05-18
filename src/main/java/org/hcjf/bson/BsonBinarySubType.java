@@ -4,8 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 
 /**
+ * Enum all the sub types of the binary type.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public enum BsonBinarySubType {
 
@@ -15,22 +15,26 @@ public enum BsonBinarySubType {
 
     private final byte id;
 
+    /**
+     * Constructor method.
+     * @param id Sub type id.
+     */
     private BsonBinarySubType(byte id) {
         this.id = id;
     }
 
     /**
-     *
-     * @return
+     * Return the id of the sub type.
+     * @return Id of the sub type.
      */
     public byte getId() {
         return id;
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Find a sub type from id.
+     * @param id Id of the sub type.
+     * @return Sub type instance or null if not exist.
      */
     public static BsonBinarySubType fromId(byte id) {
         BsonBinarySubType result = null;
@@ -45,6 +49,11 @@ public enum BsonBinarySubType {
         return result;
     }
 
+    /**
+     * Return the sub type instance that corresponds with the value class.
+     * @param value Value.
+     * @return Sub type instance.
+     */
     public static BsonBinarySubType fromValue(Object value) {
         BsonBinarySubType subType = null;
 

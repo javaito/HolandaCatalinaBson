@@ -9,7 +9,6 @@ import java.util.UUID;
 /**
  * Enum with all the supported type for the bson definition.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public enum BsonType {
 

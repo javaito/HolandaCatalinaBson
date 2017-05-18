@@ -8,7 +8,6 @@ import java.util.Set;
 /**
  * Bson array implementation.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public class BsonArray extends BsonCollection {
 

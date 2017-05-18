@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 /**
  * This class implements the bson decoder.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public final class BsonDecoder {
 
@@ -112,9 +111,9 @@ public final class BsonDecoder {
     }
 
     /**
-     *
-     * @param buffer
-     * @return
+     * Decode the body as a regex matcher instance.
+     * @param buffer Body of the regex.
+     * @return Regex matcher instance.
      */
     private static Matcher decodeRegex(ByteBuffer buffer) {
         throw new UnsupportedOperationException();

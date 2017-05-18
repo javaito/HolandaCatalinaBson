@@ -6,24 +6,40 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * Bson document implementation.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public class BsonDocument extends BsonCollection {
 
+    /**
+     * Default constructor.
+     */
     public BsonDocument() {
         //4 bytes to length and 1 byte for the separator 0x00
         this(null, DEFAULT_COLLECTION_SIZE);
     }
 
+    /**
+     * Constructor by map.
+     * @param values Map with the document fields and values.
+     */
     public BsonDocument(Map<String, Object> values) {
         this(null, values);
     }
 
+    /**
+     * Constructor by name.
+     * @param name Name of the document.
+     */
     public BsonDocument(String name) {
         this(name, DEFAULT_COLLECTION_SIZE);
     }
 
+    /**
+     * Constructor by name and map.
+     * @param name Name of the document.
+     * @param values Map with the document fields and values.
+     */
     public BsonDocument(String name, Map<String, Object> values) {
         this(name, DEFAULT_COLLECTION_SIZE);
 
@@ -40,6 +56,11 @@ public class BsonDocument extends BsonCollection {
         }
     }
 
+    /**
+     * Constructor by name and length.
+     * @param name Name of the document.
+     * @param length Length of the document.
+     */
     public BsonDocument(String name, Integer length) {
         super(name, length);
     }
@@ -54,17 +75,17 @@ public class BsonDocument extends BsonCollection {
     }
 
     /**
-     *
-     * @param element
+     * Add an element into the document.
+     * @param element Bson element.
      */
     public final void put(BsonElement element) {
         putElement(element);
     }
 
     /**
-     *
-     * @param elementName
-     * @param value
+     * Add an element into the document.
+     * @param elementName Element name.
+     * @param value Element value.
      */
     public final void put(String elementName, Object value) {
         if(value instanceof Map) {

@@ -4,8 +4,8 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 /**
+ * Collection of the bson elements.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public abstract class BsonCollection extends BsonElement<Map<String, BsonElement>>
         implements Iterable<String> {
@@ -14,30 +14,49 @@ public abstract class BsonCollection extends BsonElement<Map<String, BsonElement
 
     private Integer length;
 
+    /**
+     * Default constructor.
+     */
     public BsonCollection() {
         this(null, DEFAULT_COLLECTION_SIZE);
     }
 
+    /**
+     * Constroctor by name.
+     * @param name Name of the collection.
+     */
     public BsonCollection(String name) {
         this(name, DEFAULT_COLLECTION_SIZE);
     }
 
+    /**
+     * Collection by length.
+     * @param length Length of the collection.
+     */
     public BsonCollection(Integer length) {
         this(null, length);
     }
 
+    /**
+     * Constructor by name and length.
+     * @param name Name of the collection.
+     * @param length Length of the collection.
+     */
     public BsonCollection(String name, Integer length) {
         super(name, new TreeMap<>());
         this.length = length;
     }
 
+    /**
+     * Return thr length of the collection.
+     * @return Length of the collection.
+     */
     public final Integer getLength() {
         return length;
     }
 
     /**
      * Returns an iterator over elements of type {@code T}.
-     *
      * @return an Iterator.
      */
     @Override

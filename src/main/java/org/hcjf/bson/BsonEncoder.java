@@ -6,15 +6,16 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
+ * This class creates a instance of Bson document to a byte array
+ * with the bson standard format.
  * @author javaito
- * @mail javaito@gmail.com
  */
 public final class BsonEncoder {
 
     /**
-     *
-     * @param document
-     * @return
+     * Creates a bson representation of the bson document.
+     * @param document Bson document instance.
+     * @return Bson representation.
      */
     public static byte[] encode(BsonCollection document) {
         ByteBuffer result = ByteBuffer.allocate(document.getLength());
