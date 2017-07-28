@@ -63,7 +63,10 @@ public class BsonArray extends BsonCollection {
         } else if(value instanceof List) {
             add(new BsonArray(name, (List<Object>)value));
         } else if(value instanceof Set) {
-            add(new BsonArray(name, (Set<Object>)value));
+            add(new BsonArray(name, (Set<Object>) value));
+        } else if(value instanceof BsonElement) {
+            ((BsonElement)value).setName(name);
+            add(((BsonElement)value));
         } else {
             add(new BsonPrimitive(name, value));
         }

@@ -1,5 +1,6 @@
 package org.hcjf.bson;
 
+import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -141,7 +142,13 @@ public abstract class BsonElement<O extends Object> {
      * @return Date value.
      */
     public final Date getAsDate() {
-        return new Date((Long)value);
+        Date result;
+        if(value instanceof Date) {
+            result = (Date) value;
+        } else {
+            result = new Date((Long) value);
+        }
+        return result;
     }
 
     /**
@@ -149,7 +156,13 @@ public abstract class BsonElement<O extends Object> {
      * @return Byte array value.
      */
     public final byte[] getAsBytes() {
-        return (byte[]) value;
+        byte[] result;
+        if(value instanceof ByteBuffer) {
+            result = ((ByteBuffer)value).array();
+        } else {
+            result = (byte[]) value;
+        }
+        return result;
     }
 
     /**

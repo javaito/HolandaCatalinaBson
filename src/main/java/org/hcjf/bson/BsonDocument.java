@@ -93,7 +93,10 @@ public class BsonDocument extends BsonCollection {
         } else if(value instanceof List) {
             put(new BsonArray(elementName, (List<Object>)value));
         } else if(value instanceof Set) {
-            put(new BsonArray(elementName, (Set<Object>)value));
+            put(new BsonArray(elementName, (Set<Object>) value));
+        } else if(value instanceof BsonElement) {
+            ((BsonElement)value).setName(elementName);
+            put(((BsonElement)value));
         } else {
             put(new BsonPrimitive(elementName, value));
         }
