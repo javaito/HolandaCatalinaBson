@@ -11,6 +11,11 @@ import java.util.UUID;
  */
 public abstract class BsonElement<O extends Object> {
 
+    protected static final String JSON_ELEMENT_VALUE_SEPARATOR = ":";
+    protected static final String JSON_ELEMENT_VALUE_QUOTE = "\"";
+    protected static final String JSON_ELEMENT_NULL_VALUE = "null";
+    protected static final String JSON_ELEMENT_SEPARATOR = ", ";
+
     private String name;
     private final O value;
 
@@ -179,5 +184,25 @@ public abstract class BsonElement<O extends Object> {
      */
     public final Boolean getAsBoolean() {
         return (Boolean) value;
+    }
+
+    /**
+     * Return json representation
+     * @return json string representation
+     */
+    public String toJsonString() {
+        StringBuilder r = new StringBuilder();
+        r.append(getName());
+        r.append(JSON_ELEMENT_VALUE_SEPARATOR);
+        if(value == null) {
+            r.append(JSON_ELEMENT_NULL_VALUE);
+        } else if(value instanceof Number) {
+            r.append(value);
+        } else {
+            r.append(JSON_ELEMENT_VALUE_QUOTE);
+            r.append(value);
+            r.append(JSON_ELEMENT_VALUE_QUOTE);
+        }
+        return r.toString();
     }
 }
