@@ -11,6 +11,9 @@ import java.util.Set;
  */
 public class BsonDocument extends BsonCollection {
 
+    private static final String JSON_DOCUMENT_START = "{";
+    private static final String JSON_DOCUMENT_END = "}";
+
     /**
      * Default constructor.
      */
@@ -100,5 +103,24 @@ public class BsonDocument extends BsonCollection {
         } else {
             put(new BsonPrimitive(elementName, value));
         }
+    }
+
+    /**
+     * Return json representation
+     * @return json string representation
+     */
+    public String toJsonString() {
+        StringBuilder r = new StringBuilder();
+        r.append(JSON_DOCUMENT_START);
+        for(String fieldName : this) {
+            try {
+                if(r.length()>1) {
+                    r.append(JSON_ELEMENT_SEPARATOR);
+                }
+                r.append(get(fieldName).toJsonString());
+            } catch (Exception ex) {}
+        }
+        r.append(JSON_DOCUMENT_END);
+        return r.toString();
     }
 }

@@ -11,6 +11,9 @@ import java.util.Set;
  */
 public class BsonArray extends BsonCollection {
 
+    private static final String JSON_ARRAY_START = "[";
+    private static final String JSON_ARRAY_END = "]";
+
     public BsonArray(String name) {
         this(name, DEFAULT_COLLECTION_SIZE);
     }
@@ -70,5 +73,24 @@ public class BsonArray extends BsonCollection {
         } else {
             add(new BsonPrimitive(name, value));
         }
+    }
+
+    /**
+     * Return json representation
+     * @return json string representation
+     */
+    public String toJsonString() {
+        StringBuilder r = new StringBuilder();
+        r.append(JSON_ARRAY_START);
+        for(String fieldName : this) {
+            try {
+                if(r.length()>1) {
+                    r.append(JSON_ELEMENT_SEPARATOR);
+                }
+                r.append(get(fieldName).toJsonString());
+            } catch (Exception ex) {}
+        }
+        r.append(JSON_ARRAY_END);
+        return r.toString();
     }
 }
