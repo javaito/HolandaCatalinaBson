@@ -83,7 +83,7 @@ public enum BsonType {
             type = NULL;
         }else {
             Class clazz = value.getClass();
-            if (Double.class.isAssignableFrom(clazz)) {
+            if (Double.class.isAssignableFrom(clazz) || Float.class.isAssignableFrom(clazz)) {
                 type = DOUBLE;
             } else if (String.class.isAssignableFrom(clazz)) {
                 type = STRING;
@@ -93,7 +93,7 @@ public enum BsonType {
                 type = BOOLEAN;
             } else if (Date.class.isAssignableFrom(clazz)) {
                 type = DATE;
-            } else if (Integer.class.isAssignableFrom(clazz)) {
+            } else if (Integer.class.isAssignableFrom(clazz) || Short.class.isAssignableFrom(clazz) || Byte.class.isAssignableFrom(clazz)) {
                 type = INTEGER;
             } else if (Long.class.isAssignableFrom(clazz)) {
                 type = LONG;
