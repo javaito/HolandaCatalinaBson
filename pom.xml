@@ -13,7 +13,7 @@
     <name>HCJF Bson Implementation</name>
     <groupId>com.github.javaito</groupId>
     <artifactId>hcjf-bson</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
     <description>Bson library</description>
     <url>https://github.com/javaito/HolandaCatalinaBson</url>
@@ -45,8 +45,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.9</source>
+                    <target>1.9</target>
                 </configuration>
             </plugin>
         </plugins>
