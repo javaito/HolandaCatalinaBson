@@ -1,9 +1,6 @@
 package org.hcjf.bson;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Bson document implementation.
@@ -106,7 +103,17 @@ public class BsonDocument extends BsonCollection {
     }
 
     /**
-     * Return json representation
+     * Verify if the document contains an element with the specific name.
+     * @param elementName Element name.
+     * @return Returns true if the element is contained into the
+     * document and false in the otherwise.
+     */
+    public final boolean hasElement(String elementName) {
+        return getValue().containsKey(elementName);
+    }
+
+    /**
+     * Returns json representation
      * @return json string representation
      */
     public String toJsonString() {
@@ -122,5 +129,26 @@ public class BsonDocument extends BsonCollection {
         }
         r.append(JSON_DOCUMENT_END);
         return r.toString();
+    }
+
+    /**
+     * Returns all the values into the bson document as map.
+     * @return Bson document as map.
+     */
+    public Map<String,Object> toMap() {
+        Map<String,Object> result = new HashMap<>();
+        Object object;
+        for(String fieldName : this) {
+            object = get(fieldName);
+            if(object instanceof BsonDocument) {
+                object = ((BsonDocument)object).toMap();
+            } else if(object instanceof BsonArray) {
+                object = ((BsonArray)object).toList();
+            } else if(object instanceof BsonPrimitive) {
+                object = ((BsonPrimitive)object).get();
+            }
+            result.put(fieldName, object);
+        }
+        return result;
     }
 }

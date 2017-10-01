@@ -1,9 +1,6 @@
 package org.hcjf.bson;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Bson array implementation.
@@ -92,5 +89,26 @@ public class BsonArray extends BsonCollection {
         }
         r.append(JSON_ARRAY_END);
         return r.toString();
+    }
+
+    /**
+     * Returns all the values into the bson array as list.
+     * @return Bson document as map.
+     */
+    public List<Object> toList() {
+        List<Object> result = new ArrayList<>();
+        Object object;
+        for(String fieldName : this) {
+            object = get(fieldName).getValue();
+            if(object instanceof BsonDocument) {
+                object = ((BsonDocument)object).toMap();
+            } else if(object instanceof BsonArray) {
+                object = ((BsonArray)object).toList();
+            } else if(object instanceof BsonPrimitive) {
+                object = ((BsonPrimitive)object).get();
+            }
+            result.add(object);
+        }
+        return result;
     }
 }
