@@ -16,6 +16,9 @@ public class BsonPrimitive extends BsonElement<Object> {
     public BsonPrimitive(String name, Object value) {
         super(name, value);
         this.type = BsonType.fromValue(value);
+        if(type == null || type.equals(BsonType.ARRAY) || type.equals(BsonType.DOCUMENT)) {
+            throw new IllegalArgumentException("Unable to create a primitive element with value: " + value);
+        }
     }
 
     /**
