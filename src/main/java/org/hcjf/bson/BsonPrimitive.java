@@ -7,6 +7,7 @@ package org.hcjf.bson;
 public class BsonPrimitive extends BsonElement<Object> {
 
     private final BsonType type;
+    private final BsonBinarySubType binarySubType;
 
     /**
      * Defautl constructor.
@@ -19,10 +20,16 @@ public class BsonPrimitive extends BsonElement<Object> {
         if(type == null || type.equals(BsonType.ARRAY) || type.equals(BsonType.DOCUMENT)) {
             throw new IllegalArgumentException("Unable to create a primitive element with value: " + value);
         }
+
+        if(type.equals(BsonType.BINARY)) {
+            binarySubType = BsonBinarySubType.fromValue(value);
+        } else {
+            binarySubType = null;
+        }
     }
 
     /**
-     * Return the value of the element.
+     * Returns the value of the element.
      * @return Value of the element.
      */
     public final Object get() {
@@ -30,10 +37,18 @@ public class BsonPrimitive extends BsonElement<Object> {
     }
 
     /**
-     * Return the bson type that represent the implementation of the stored value.
+     * Returns the bson type that represent the implementation of the stored value.
      * @return Bson type.
      */
     public BsonType getType() {
         return type;
+    }
+
+    /**
+     * Returns the sub type of the binary type.
+     * @return Binary sub type.
+     */
+    public BsonBinarySubType getBinarySubType() {
+        return binarySubType;
     }
 }
