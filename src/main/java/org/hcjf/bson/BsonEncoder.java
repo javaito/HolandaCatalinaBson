@@ -70,9 +70,9 @@ public final class BsonEncoder {
                 }
                 case BOOLEAN: result.put(((Boolean)element.getValue()) ? (byte)0x01 : (byte)0x00); break;
                 case DATE: result.putLong(((Date)element.getValue()).getTime()); break;
-                case DOUBLE: result.putDouble(((Double)element.getValue())); break;
-                case INTEGER: result.putInt(((Integer)element.getValue())); break;
-                case LONG: result.putLong(((Long)element.getValue())); break;
+                case DOUBLE: result.putDouble(((Number)element.getValue()).doubleValue()); break;
+                case INTEGER: result.putInt(((Number)element.getValue()).intValue()); break;
+                case LONG: result.putLong(((Number)element.getValue()).longValue()); break;
                 case STRING: {
                     String stringValue = (String) element.getValue();
                     //Bson specification, the total length is the length of the string + 1 for 0x00

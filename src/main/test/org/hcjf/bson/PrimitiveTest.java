@@ -15,6 +15,8 @@ public class PrimitiveTest {
 
     private static final String STRING_FIELD = "stringField";
     private static final String INTEGER_FIELD = "integerField";
+    private static final String SHORT_FIELD = "shortField";
+    private static final String BYTE_FIELD = "byteField";
     private static final String LONG_FIELD = "longField";
     private static final String UUID_FIELD = "uuidField";
     private static final String BYTE_ARRAY_FIELD = "byteArrayField";
@@ -34,12 +36,18 @@ public class PrimitiveTest {
     @Test
     public void integerTest() {
         BsonDocument document = new BsonDocument();
+        document.put(BYTE_FIELD, (byte)3);
+        document.put(SHORT_FIELD, (short)2);
         document.put(INTEGER_FIELD, 4);
         document.put(LONG_FIELD, Long.MAX_VALUE);
         byte[] bosn = BsonEncoder.encode(document);
         BsonDocument decodedDocument = BsonDecoder.decode(bosn);
         Assert.assertEquals(document.get(INTEGER_FIELD).getAsInteger(), decodedDocument.get(INTEGER_FIELD).getAsInteger());
         Assert.assertEquals(decodedDocument.get(INTEGER_FIELD).getAsInteger().intValue(), 4);
+        Assert.assertEquals(document.get(SHORT_FIELD).getAsShort(), decodedDocument.get(SHORT_FIELD).getAsShort());
+        Assert.assertEquals(decodedDocument.get(SHORT_FIELD).getAsShort().shortValue(), (short) 2);
+        Assert.assertEquals(document.get(BYTE_FIELD).getAsByte(), decodedDocument.get(BYTE_FIELD).getAsByte());
+        Assert.assertEquals(decodedDocument.get(BYTE_FIELD).getAsByte().byteValue(), (byte) 3);
         Assert.assertEquals(document.get(LONG_FIELD).getAsLong(), decodedDocument.get(LONG_FIELD).getAsLong());
         Assert.assertEquals(decodedDocument.get(LONG_FIELD).getAsLong().longValue(), Long.MAX_VALUE);
     }

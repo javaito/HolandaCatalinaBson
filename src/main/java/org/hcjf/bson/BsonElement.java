@@ -123,7 +123,23 @@ public abstract class BsonElement<O extends Object> {
      * @return Integer value.
      */
     public final Integer getAsInteger() {
-        return (Integer) value;
+        return ((Number)value).intValue();
+    }
+
+    /**
+     * Return the element value as a short.
+     * @return Short value.
+     */
+    public final Short getAsShort() {
+        return ((Number)value).shortValue();
+    }
+
+    /**
+     * Return the element value as a byte.
+     * @return Byte value.
+     */
+    public final Byte getAsByte() {
+        return ((Number)value).byteValue();
     }
 
     /**
