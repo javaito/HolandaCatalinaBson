@@ -91,7 +91,9 @@ public abstract class BsonCollection extends BsonElement<Map<String, BsonElement
                 length += 1;
             } else if (Date.class.isAssignableFrom(clazz)) {
                 length += 8;
-            } else if (Integer.class.isAssignableFrom(clazz)) {
+            } else if (Integer.class.isAssignableFrom(clazz) ||
+                    Short.class.isAssignableFrom(clazz) ||
+                    Byte.class.isAssignableFrom(clazz)) {
                 length += 4;
             } else if (Long.class.isAssignableFrom(clazz)) {
                 length += 8;
