@@ -3,6 +3,7 @@ package org.hcjf.bson;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class PrimitiveTest {
     private static final String BYTE_ARRAY_FIELD = "byteArrayField";
     private static final String BYTE_BUFFER_FIELD = "byteBufferField";
     private static final String DATE_FIELD = "dateField";
+    private static final String BIG_DECIMAL_FIELD = "bigDecimalFields";
 
     @Test
     public void stringTest() {
@@ -75,5 +77,15 @@ public class PrimitiveTest {
         byte[] bosn = BsonEncoder.encode(document);
         BsonDocument decodedDocument = BsonDecoder.decode(bosn);
         Assert.assertEquals(document.get(DATE_FIELD).getAsDate(), decodedDocument.get(DATE_FIELD).getAsDate());
+    }
+
+    @Test
+    public void bigDecimalTest() {
+        BigDecimal bigDecimal = new BigDecimal(0.2);
+        BsonDocument document = new BsonDocument();
+        document.put(BIG_DECIMAL_FIELD, bigDecimal);
+        byte[] bosn = BsonEncoder.encode(document);
+        BsonDocument decodedDocument = BsonDecoder.decode(bosn);
+        Assert.assertTrue(decodedDocument.get(BIG_DECIMAL_FIELD).getAsDouble() instanceof Double);
     }
 }

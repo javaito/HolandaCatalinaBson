@@ -107,6 +107,8 @@ public enum BsonType {
                 type = DOCUMENT;
             } else if (BsonArray.class.isAssignableFrom(clazz)) {
                 type = ARRAY;
+            } else if (Number.class.isAssignableFrom(clazz)) {
+                type = DOUBLE;
             }
         }
 

@@ -101,6 +101,8 @@ public abstract class BsonCollection extends BsonElement<Map<String, BsonElement
                 length += 16;
             } else if (BsonCollection.class.isAssignableFrom(element.getClass())) {
                 length += ((BsonCollection) element).getLength();
+            } else if (Number.class.isAssignableFrom(clazz)) {
+                length += 8;
             }
         }
 
