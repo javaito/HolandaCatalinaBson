@@ -111,4 +111,15 @@ public class BsonArray extends BsonCollection {
         }
         return result;
     }
+
+    /**
+     * Override the iterator method in order to sort the keys as integer index.
+     * @return Iterator instance.
+     */
+    @Override
+    public Iterator<String> iterator() {
+        TreeSet<String> sortedSet = new TreeSet<>(Comparator.comparingInt(Integer::parseInt));
+        sortedSet.addAll(getValue().keySet());
+        return sortedSet.iterator();
+    }
 }

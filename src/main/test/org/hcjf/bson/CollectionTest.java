@@ -3,10 +3,7 @@ package org.hcjf.bson;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author javaito
@@ -71,6 +68,33 @@ public class CollectionTest {
 
         List list = bsonArray.toList();
         Assert.assertEquals(bsonArray.size(), list.size());
+    }
+
+    @Test
+    public void longArrayTest() {
+        List<UUID> list1 = new ArrayList<>();
+        BsonArray bsonArray = new BsonArray("array");
+        for (int i = 0; i < 50; i++) {
+            list1.add(UUID.randomUUID());
+            bsonArray.add(list1.get(i));
+        }
+
+        List<Object> bsonList = bsonArray.toList();
+        for (int i = 0; i < 50; i++) {
+            Assert.assertEquals(list1.get(i), bsonList.get(i));
+        }
+
+        BsonDocument document = new BsonDocument();
+        document.put(bsonArray);
+        byte[] serializedDocument = BsonEncoder.encode(document);
+        BsonDocument document1 = BsonDecoder.decode(serializedDocument);
+
+        BsonArray bsonArray1 = document1.get("array").getAsArray();
+        List<Object> bsonList1 = bsonArray1.toList();
+        for (int i = 0; i < 50; i++) {
+            Assert.assertEquals(list1.get(i), bsonList1.get(i));
+        }
+
     }
 
 }
