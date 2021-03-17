@@ -99,7 +99,7 @@ public class BsonArray extends BsonCollection {
         List<Object> result = new ArrayList<>();
         Object object;
         for(String fieldName : this) {
-            object = get(fieldName).getValue();
+            object = get(fieldName);
             if(object instanceof BsonDocument) {
                 object = ((BsonDocument)object).toMap();
             } else if(object instanceof BsonArray) {
